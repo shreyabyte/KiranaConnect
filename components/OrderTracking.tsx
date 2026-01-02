@@ -28,13 +28,13 @@ const DeliveryMap: React.FC<{ progress: number }> = ({ progress }) => {
           <span className="text-[8px] font-black uppercase text-[#C05621] mt-2 tracking-widest">Shop</span>
         </div>
 
-        <div className="flex-grow h-2 bg-white/60 mx-6 relative rounded-full overflow-hidden shadow-inner">
+        <div className="flex-grow h-2 bg-white/60 mx-6 relative rounded-full overflow-visible shadow-inner">
           <div 
             className="absolute h-full bg-[#C05621] transition-all duration-300 ease-linear" 
             style={{ width: `${progress}%` }} 
           />
           <div 
-            className="absolute top-[-14px] transition-all duration-300 ease-linear z-20"
+            className="absolute top-[-24px] transition-all duration-300 ease-linear z-20"
             style={{ left: `calc(${progress}% - 20px)` }}
           >
             <div className="bg-white p-2 rounded-xl shadow-2xl border-2 border-[#FEF3C7] animate-bounce">

@@ -25,6 +25,17 @@ const MerchantDashboard: React.FC<MerchantDashboardProps> = ({ orders, products,
 
   const activeOrders = orders.filter(o => o.status !== 'Delivered');
 
+  const now = new Date();
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const endOfToday = startOfToday + 24 * 60 * 60 * 1000;
+
+  const todaysOrders = orders.filter(o => o.createdAt >= startOfToday && o.createdAt < endOfToday);
+  const todaysSales = todaysOrders.reduce((sum, o) => sum + o.total, 0);
+  const formattedTodaysSales = `₹${todaysSales.toLocaleString('en-IN')}`;
+
+  const deliveredOrders = orders.filter(o => o.status === 'Delivered');
+  const happyGuests = deliveredOrders.length;
+
   const handleGenerateImage = async () => {
     if (!newProd.name) {
       alert("Please enter a product name first!");
@@ -81,10 +92,10 @@ const MerchantDashboard: React.FC<MerchantDashboardProps> = ({ orders, products,
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         {[
-          { label: 'Today Sales', val: '₹4,280', icon: DollarSign, color: 'text-indigo-600', bg: 'bg-indigo-50' },
-          { label: 'Active Orders', val: activeOrders.length, icon: Package, color: 'text-[#C05621]', bg: 'bg-orange-50' },
-          { label: 'Happy Guests', val: '128', icon: Users, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-          { label: 'Market Rank', val: '#4', icon: CheckCircle2, color: 'text-amber-600', bg: 'bg-amber-50' },
+          { label: 'Today Sales', val: formattedTodaysSales, icon: DollarSign, color: 'text-indigo-600', bg: 'bg-indigo-50' },
+          { label: 'Active Orders', val: activeOrders.length.toString(), icon: Package, color: 'text-[#C05621]', bg: 'bg-orange-50' },
+          { label: 'Happy Guests', val: happyGuests.toString(), icon: Users, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+          { label: 'Market Rank', val: `#${Math.max(1, 10 - happyGuests)}`, icon: CheckCircle2, color: 'text-amber-600', bg: 'bg-amber-50' },
         ].map((s, i) => (
           <div key={i} className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-[#F7E8D0] group hover:border-[#C05621] transition-all">
             <div className={`p-4 ${s.bg} ${s.color} rounded-2xl w-fit mb-6 transition-all group-hover:scale-110`}>

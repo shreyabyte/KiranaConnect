@@ -4,7 +4,6 @@ import Home from './views/Home';
 import StoreDetail from './views/StoreDetail';
 import MerchantDashboard from './views/MerchantDashboard';
 import CartSidebar from './components/CartSidebar';
-import ChatAssistant from './components/ChatAssistant';
 import PaymentModal from './components/PaymentModal';
 import OrderTracking from './components/OrderTracking';
 import { Product, CartItem, Order, OrderStatus, Store } from './types';
@@ -22,6 +21,10 @@ const App: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [activeOrderId, setActiveOrderId] = useState<string | null>(null);
   const [subscriptions, setSubscriptions] = useState<CartItem[]>([]);
+  const [subscriptionToast, setSubscriptionToast] = useState<{
+    product: string;
+    frequency: 'Daily' | 'Weekly' | 'Monthly';
+  } | null>(null);
   
   // Real-time states for the mock environment
   const [allStores, setAllStores] = useState<Store[]>(MOCK_STORES);
@@ -52,7 +55,7 @@ const App: React.FC = () => {
       if (prev.find(s => s.id === product.id)) return prev;
       return [...prev, subItem];
     });
-    alert(`Successfully subscribed to ${product.name} (${frequency})`);
+    setSubscriptionToast({ product: product.name, frequency });
   };
 
   const updateCartQty = (id: string, delta: number) => {
@@ -109,6 +112,12 @@ const App: React.FC = () => {
 
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const activeOrder = orders.find(o => o.id === activeOrderId);
+
+  useEffect(() => {
+    if (!subscriptionToast) return;
+    const timer = setTimeout(() => setSubscriptionToast(null), 3000);
+    return () => clearTimeout(timer);
+  }, [subscriptionToast]);
 
   return (
     <div className="min-h-screen bg-[#FFFDF9] text-[#2D3748]">
@@ -223,7 +232,29 @@ const App: React.FC = () => {
         total={cartItems.reduce((s, i) => s + i.price * i.quantity, 0)}
       />
 
-      <ChatAssistant />
+      {subscriptionToast && (
+        <div className="fixed bottom-6 right-4 sm:right-8 z-40">
+          <div className="bg-[#ECFDF3] border border-emerald-200 rounded-[2rem] px-5 py-4 shadow-2xl flex items-center gap-3 max-w-sm animate-[fadeIn_0.3s_ease-out]">
+            <div className="w-10 h-10 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-lg">
+              <CalendarCheck className="w-5 h-5" />
+            </div>
+            <div className="flex-1">
+              <p className="text-[10px] font-black uppercase tracking-widest text-emerald-700">Subscription Added</p>
+              <p className="text-sm font-semibold text-emerald-900">
+                {subscriptionToast.product} 
+                <span className="text-emerald-600 font-medium"> · {subscriptionToast.frequency} delivery</span>
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setSubscriptionToast(null)}
+              className="ml-2 text-emerald-500 hover:text-emerald-700 text-lg leading-none"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
