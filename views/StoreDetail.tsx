@@ -115,7 +115,7 @@ const StoreDetail: React.FC<StoreDetailProps> = ({ store, products, onBack, onAd
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto px-4 -mt-6">
+      <div className="max-w-7xl mx-auto px-4 mt-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-20">
           <div className="lg:col-span-2 space-y-8">
             <div className="bg-[#2D3748] p-4 rounded-3xl shadow-xl flex space-x-2 overflow-x-auto no-scrollbar border border-slate-700">

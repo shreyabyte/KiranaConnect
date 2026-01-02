@@ -13,7 +13,7 @@ const Home: React.FC<HomeProps> = ({ stores, onStoreSelect }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
 
-  const filters = ['All', 'Pharmacy', 'Home Made', 'Dairy', 'Organic', 'Groceries'];
+  const filters = ['All', 'Pharmacy', 'Home Made', 'Dairy', 'Groceries'];
 
   const filteredStores = stores.filter(store => {
     const matchesSearch = store.name.toLowerCase().includes(searchTerm.toLowerCase());
