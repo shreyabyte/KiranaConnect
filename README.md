@@ -1,0 +1,1 @@
+KiranaConnect is a hyperlocal digital marketplace that brings existing kirana stores online, enabling customers to browse products, compare prices, place orders, track deliveries, and rate stores — all without relying on dark warehouses.

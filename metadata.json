@@ -1,0 +1,7 @@
+{
+  "name": "KiranaConnect",
+  "description": "A hyperlocal digital marketplace connecting customers with nearby kirana stores for price transparency and fast delivery.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
