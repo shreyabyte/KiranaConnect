@@ -74,13 +74,13 @@ export const MOCK_STORES: Store[] = [
 export const MOCK_PRODUCTS: Product[] = [
   {
     id: 'p1',
-    name: 'Stone-Ground Wheat Flour',
-    brand: 'Neighborhood Original',
+    name: 'Ashirwad Atta',
+    brand: 'Gupta’s Family Kirana',
     weight: '5kg',
     price: 340,
     originalPrice: 380,
     category: 'Flour',
-    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=400',
+    image: 'imageasset/atta.png',
     storeId: 's1'
   },
   {
@@ -227,6 +227,28 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Pickles',
     image: 'imageasset/lemonpickle.png',
     storeId: 's7'
+  },
+  {
+    id: 'p22',
+    name: 'Premium Basmati Rice',
+    brand: 'Gupta’s Family Kirana',
+    weight: '5kg',
+    price: 780,
+    originalPrice: 840,
+    category: 'Grains',
+    image: 'imageasset/rice.png',
+    storeId: 's1'
+  },
+  {
+    id: 'p23',
+    name: 'Cold-Pressed Mustard Oil',
+    brand: 'Gupta’s Family Kirana',
+    weight: '1L',
+    price: 210,
+    originalPrice: 250,
+    category: 'Oils',
+    image: 'imageasset/oil.png',
+    storeId: 's1'
   }
 ];
 
