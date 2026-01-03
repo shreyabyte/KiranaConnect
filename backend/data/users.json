@@ -1,0 +1,16 @@
+[
+  {
+    "id": "d3823698-f318-45a2-aee2-cfb8fc32e2b9",
+    "name": "Saatvik Sawarn ",
+    "email": "saatviksawarn000@gmail.com",
+    "passwordHash": "$2a$10$oPsrj94nbdhB/bkeaM6RA.oTbTDYmrE33YrWTUwDHiEehK7loW6uy",
+    "role": "customer"
+  },
+  {
+    "id": "e03f6ddb-74a4-44e4-80b1-617f4b3b396d",
+    "name": "saatvik",
+    "email": "saatvik@gmail.com",
+    "passwordHash": "$2a$10$u9O/6ZbJzJ8w68G1gWXp6.dR1ODAmc08sGRfLOq5mOCo5n43OvqQW",
+    "role": "seller"
+  }
+]

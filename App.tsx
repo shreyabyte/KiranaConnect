@@ -9,11 +9,14 @@ import OrderTracking from './components/OrderTracking';
 import { Product, CartItem, Order, OrderStatus, Store } from './types';
 import { MOCK_STORES, MOCK_PRODUCTS } from './constants';
 import { ShoppingBag, User, Store as StoreIcon, Heart, PackageCheck, CalendarCheck } from 'lucide-react';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import CustomerAuth from './views/CustomerAuth';
+import SellerAuth from './views/SellerAuth';
+import Welcome from './views/Welcome';
 
-type View = 'Home' | 'StoreDetail' | 'Merchant';
-
-const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<View>('Home');
+type View = 'Welcome' | 'Home' | 'StoreDetail' | 'Merchant' | 'CustomerAuth' | 'SellerAuth';
+const AppContent: React.FC = () => {
+  const [currentView, setCurrentView] = useState<View>('Welcome');
   const [selectedStoreId, setSelectedStoreId] = useState<string | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -112,6 +115,7 @@ const App: React.FC = () => {
 
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const activeOrder = orders.find(o => o.id === activeOrderId);
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     if (!subscriptionToast) return;
@@ -126,11 +130,13 @@ const App: React.FC = () => {
           <div className="flex justify-between h-20 items-center">
             <div 
               className="flex items-center cursor-pointer group" 
-              onClick={() => setCurrentView('Home')}
+              onClick={() => setCurrentView('Welcome')}
             >
-              <div className="bg-[#C05621] p-3 rounded-2xl mr-3 shadow-lg shadow-orange-100 group-hover:rotate-6 transition-transform">
-                <ShoppingBag className="w-6 h-6 text-white" />
-              </div>
+              <img
+                src="/imageasset/logo.png"
+                alt="KiranaConnect logo"
+                className="w-12 h-12 mr-3 object-contain"
+              />
               <div>
                 <span className="text-2xl font-black text-[#2D3748] tracking-tight block leading-none">
                   Kirana<span className="text-[#C05621]">Connect</span>
@@ -141,6 +147,12 @@ const App: React.FC = () => {
 
             <div className="hidden md:flex items-center space-x-10">
               <button 
+                onClick={() => setCurrentView('Welcome')}
+                className={`text-sm font-black uppercase tracking-widest transition-all ${currentView === 'Welcome' ? 'text-[#C05621]' : 'text-slate-400 hover:text-[#C05621]'}`}
+              >
+                Home
+              </button>
+              <button 
                 onClick={() => setCurrentView('Home')}
                 className={`text-sm font-black uppercase tracking-widest transition-all ${currentView === 'Home' ? 'text-[#C05621]' : 'text-slate-400 hover:text-[#C05621]'}`}
               >
@@ -148,13 +160,32 @@ const App: React.FC = () => {
               </button>
               <button 
                 onClick={() => setCurrentView('Merchant')}
-                className={`text-sm font-black uppercase tracking-widest transition-all ${currentView === 'Merchant' ? 'text-[#C05621]' : 'text-slate-400 hover:text-[#C05621]'}`}
+                className={`text-sm font-black uppercase tracking-widest transition-all ${currentView === 'Merchant' || currentView === 'SellerAuth' ? 'text-[#C05621]' : 'text-slate-400 hover:text-[#C05621]'}`}
               >
                 Seller Portal
               </button>
             </div>
 
             <div className="flex items-center space-x-4">
+              {user ? (
+                <div className="hidden md:flex items-center gap-3 text-xs font-black uppercase tracking-widest text-slate-500">
+                  <span>Hi, {user.name}</span>
+                  <span className="px-2 py-1 rounded-full bg-slate-900 text-white text-[10px]">{user.role}</span>
+                  <button
+                    onClick={logout}
+                    className="text-[10px] font-black uppercase tracking-widest text-[#C05621]"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setCurrentView('CustomerAuth')}
+                  className="hidden md:inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-[#C05621]"
+                >
+                  <User className="w-4 h-4" /> Login
+                </button>
+              )}
               {subscriptions.length > 0 && (
                 <div className="hidden lg:flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-2xl border border-emerald-100">
                   <CalendarCheck className="w-4 h-4" />
@@ -196,6 +227,13 @@ const App: React.FC = () => {
           />
         )}
 
+        {currentView === 'Welcome' && (
+          <Welcome 
+            onEnterMarketplace={() => setCurrentView('Home')} 
+            onCustomerAuth={() => setCurrentView('CustomerAuth')} 
+            onSellerAuth={() => setCurrentView('Merchant')}
+          />
+        )}
         {currentView === 'Home' && <Home stores={allStores} onStoreSelect={handleStoreSelect} />}
         {currentView === 'StoreDetail' && selectedStoreId && (
           <StoreDetail 
@@ -207,13 +245,20 @@ const App: React.FC = () => {
             onRateStore={handleRateStore}
           />
         )}
+        {currentView === 'CustomerAuth' && (
+          <CustomerAuth onAuthSuccess={() => setCurrentView('Home')} />
+        )}
         {currentView === 'Merchant' && (
-          <MerchantDashboard 
-            orders={orders} 
-            products={allProducts.filter(p => p.storeId === 's1')} // Assuming fixed merchant for demo
-            onUpdateStatus={updateOrderStatus} 
-            onAddProduct={handleAddProduct}
-          />
+          user?.role === 'seller' ? (
+            <MerchantDashboard 
+              orders={orders} 
+              products={allProducts.filter(p => p.storeId === 's1')} // Assuming fixed merchant for demo
+              onUpdateStatus={updateOrderStatus} 
+              onAddProduct={handleAddProduct}
+            />
+          ) : (
+            <SellerAuth onAuthSuccess={() => setCurrentView('Merchant')} />
+          )
         )}
       </main>
 
@@ -258,5 +303,11 @@ const App: React.FC = () => {
     </div>
   );
 };
+
+const App: React.FC = () => (
+  <AuthProvider>
+    <AppContent />
+  </AuthProvider>
+);
 
 export default App;
