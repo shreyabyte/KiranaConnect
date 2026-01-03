@@ -1,6 +1,28 @@
 
 import { Store, Product } from './types';
 
+import guptaImg from './imageasset/gupta.png';
+import diaryImg from './imageasset/diary.png';
+import sweetImg from './imageasset/sweet.png';
+import pharmacyImg from './imageasset/pharmacy.png';
+import pickleImg from './imageasset/pickle.png';
+import bakeryImg from './imageasset/bakery.png';
+
+import attaImg from './imageasset/atta.png';
+import paneerImg from './imageasset/paneer.png';
+import milkImg from './imageasset/Milk.png';
+import teaImg from './imageasset/tea.png';
+import mpickleImg from './imageasset/mpickle.png';
+import jalebiImg from './imageasset/jalebi.png';
+import ladduImg from './imageasset/laddu.png';
+import barfiImg from './imageasset/barfi.png';
+import freshcreamImg from './imageasset/freshcream.png';
+import cookiesImg from './imageasset/cookies.png';
+import herbbreadImg from './imageasset/herbbread.png';
+import lemonpickleImg from './imageasset/lemonpickle.png';
+import riceImg from './imageasset/rice.png';
+import oilImg from './imageasset/oil.png';
+
 export const MOCK_STORES: Store[] = [
   {
     id: 's1',
@@ -9,7 +31,7 @@ export const MOCK_STORES: Store[] = [
     reviewCount: 342,
     distance: '0.3 km',
     deliveryTime: '12 mins',
-    image: '/imageasset/gupta.png',
+    image: guptaImg,
     category: ['Flour', 'Spices', 'Grains', 'Groceries'],
     isBestPrice: true,
     type: 'Retail'
@@ -21,7 +43,7 @@ export const MOCK_STORES: Store[] = [
     reviewCount: 156,
     distance: '0.8 km',
     deliveryTime: '20 mins',
-    image: '/imageasset/diary.png',
+    image: diaryImg,
     category: ['Dairy', 'Ghee', 'Paneer'],
     type: 'Retail'
   },
@@ -32,7 +54,7 @@ export const MOCK_STORES: Store[] = [
     reviewCount: 210,
     distance: '0.5 km',
     deliveryTime: '15 mins',
-    image: '/imageasset/sweet.png',
+    image: sweetImg,
     category: ['Sweets', 'Snacks', 'Ladoos'],
     type: 'Retail'
   },
@@ -43,7 +65,7 @@ export const MOCK_STORES: Store[] = [
     reviewCount: 520,
     distance: '0.6 km',
     deliveryTime: '10 mins',
-    image: '/imageasset/pharmacy.png',
+    image: pharmacyImg,
     category: ['Medicine', 'Healthcare', 'Wellness'],
     type: 'Pharmacy'
   },
@@ -54,7 +76,7 @@ export const MOCK_STORES: Store[] = [
     reviewCount: 75,
     distance: '0.2 km',
     deliveryTime: '15 mins',
-    image: '/imageasset/pickle.png',
+    image: pickleImg,
     category: ['Pickles', 'Masala', 'Home Made'],
     type: 'HomeSeller'
   },
@@ -65,7 +87,7 @@ export const MOCK_STORES: Store[] = [
     reviewCount: 42,
     distance: '1.1 km',
     deliveryTime: '45 mins',
-    image: '/imageasset/bakery.png',
+    image: bakeryImg,
     category: ['Cakes', 'Bread', 'Cookies'],
     type: 'HomeSeller'
   }
@@ -80,7 +102,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 340,
     originalPrice: 380,
     category: 'Flour',
-    image: 'imageasset/atta.png',
+    image: attaImg,
     storeId: 's1'
   },
   {
@@ -91,7 +113,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 95,
     originalPrice: 110,
     category: 'Dairy',
-    image: 'imageasset/paneer.png',
+    image: paneerImg,
     storeId: 's2',
     subscriptionEligible: true
   },
@@ -103,7 +125,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 68,
     originalPrice: 72,
     category: 'Dairy',
-    image: 'imageasset/milk.png',
+    image: milkImg,
     storeId: 's2',
     subscriptionEligible: true
   },
@@ -126,7 +148,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 150,
     originalPrice: 175,
     category: 'Wellness',
-    image: 'imageasset/tea.png',
+    image: teaImg,
     storeId: 's6'
   },
   {
@@ -137,7 +159,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 240,
     originalPrice: 280,
     category: 'Pickles',
-    image: 'imageasset/mpickle.png',
+    image: mpickleImg,
     storeId: 's7'
   },
   {
@@ -159,7 +181,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 260,
     originalPrice: 300,
     category: 'Sweets',
-    image: 'imageasset/jalebi.png',
+    image: jalebiImg,
     storeId: 's4'
   },
   {
@@ -170,7 +192,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 320,
     originalPrice: 360,
     category: 'Sweets',
-    image: 'imageasset/laddu.png',
+    image: ladduImg,
     storeId: 's4'
   },
   {
@@ -181,7 +203,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 380,
     originalPrice: 420,
     category: 'Sweets',
-    image: 'imageasset/barfi.png',
+    image: barfiImg,
     storeId: 's4'
   },
   {
@@ -192,7 +214,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 420,
     originalPrice: 480,
     category: 'Cakes',
-    image: 'imageasset/freshcream.png',
+    image: freshcreamImg,
     storeId: 's8'
   },
   {
@@ -203,7 +225,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 180,
     originalPrice: 220,
     category: 'Cookies',
-    image: 'imageasset/cookies.png',
+    image: cookiesImg,
     storeId: 's8'
   },
   {
@@ -214,7 +236,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 90,
     originalPrice: 110,
     category: 'Bread',
-    image: 'imageasset/herbbread.png',
+    image: herbbreadImg,
     storeId: 's8'
   },
   {
@@ -225,7 +247,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 220,
     originalPrice: 260,
     category: 'Pickles',
-    image: 'imageasset/lemonpickle.png',
+    image: lemonpickleImg,
     storeId: 's7'
   },
   {
@@ -236,7 +258,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 780,
     originalPrice: 840,
     category: 'Grains',
-    image: 'imageasset/rice.png',
+    image: riceImg,
     storeId: 's1'
   },
   {
@@ -247,7 +269,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 210,
     originalPrice: 250,
     category: 'Oils',
-    image: 'imageasset/oil.png',
+    image: oilImg,
     storeId: 's1'
   }
 ];

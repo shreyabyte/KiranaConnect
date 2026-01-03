@@ -13,7 +13,8 @@
     "types": [
       "node",
       "react",
-      "react-dom"
+      "react-dom",
+      "vite/client"
     ],
     "moduleResolution": "bundler",
     "isolatedModules": true,

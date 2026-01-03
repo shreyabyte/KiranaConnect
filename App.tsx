@@ -9,6 +9,7 @@ import OrderTracking from './components/OrderTracking';
 import { Product, CartItem, Order, OrderStatus, Store } from './types';
 import { MOCK_STORES, MOCK_PRODUCTS } from './constants';
 import { ShoppingBag, User, Store as StoreIcon, Heart, PackageCheck, CalendarCheck } from 'lucide-react';
+import logoImg from './imageasset/logo.png';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import CustomerAuth from './views/CustomerAuth';
 import SellerAuth from './views/SellerAuth';
@@ -133,7 +134,7 @@ const AppContent: React.FC = () => {
               onClick={() => setCurrentView('Welcome')}
             >
               <img
-                src="/imageasset/logo.png"
+                src={logoImg}
                 alt="KiranaConnect logo"
                 className="w-12 h-12 mr-3 object-contain"
               />
